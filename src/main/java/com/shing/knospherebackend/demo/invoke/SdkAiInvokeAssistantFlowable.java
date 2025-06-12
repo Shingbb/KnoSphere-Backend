@@ -12,7 +12,6 @@ import com.alibaba.dashscope.utils.JsonUtils;
 import io.reactivex.Flowable;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,7 +29,7 @@ public class SdkAiInvokeAssistantFlowable {
      * @param message 生成结果对象
      */
     private static void handleGenerationResult(GenerationResult message) {
-        System.out.println(JsonUtils.toJson(message));
+        log.info(JsonUtils.toJson(message));
     }
 
     /**

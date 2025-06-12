@@ -3,6 +3,7 @@ package com.shing.knospherebackend.demo.invoke;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * HTTP 方式调用 AI
@@ -10,6 +11,7 @@ import cn.hutool.json.JSONUtil;
  * @author Shing
  * date 6/6/2025
  */
+@Slf4j
 public class HttpAiInvoke {
     public static void main(String[] args) {
         // API密钥
@@ -53,6 +55,6 @@ public class HttpAiInvoke {
                 .body();
 
         // 输出结果
-        System.out.println(result);
+        log.info(result);
     }
 }

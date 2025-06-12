@@ -1,6 +1,8 @@
 package com.shing.knospherebackend.demo.invoke;
 
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Component;
  * @author Shing
  * date 6/6/2025
  */
+@Slf4j
 @Component
 public class SpringAiAiInvoke  implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -21,10 +24,10 @@ public class SpringAiAiInvoke  implements ApplicationListener<ContextRefreshedEv
     private ChatModel dashscopeChatModel;
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void onApplicationEvent(@NotNull ContextRefreshedEvent event) {
         AssistantMessage assistantMessage = dashscopeChatModel.call(new Prompt("你好"))
                 .getResult()
                 .getOutput();
-        System.out.println(assistantMessage.getText());
+        log.info(assistantMessage.getText());
     }
 }

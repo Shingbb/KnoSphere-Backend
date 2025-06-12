@@ -13,6 +13,7 @@ import io.reactivex.Flowable;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * 阿里云灵积 AI SDK 流式调用
@@ -30,7 +31,7 @@ public class SdkAiInvokeFlowable {
      * @param message 生成结果对象
      */
     private static void handleGenerationResult(GenerationResult message) {
-        System.out.println(JsonUtils.toJson(message));
+        log.info(JsonUtils.toJson(message));
     }
 
     /**
@@ -63,7 +64,7 @@ public class SdkAiInvokeFlowable {
                 .apiKey(TestApiKey.API_KEY)
                 // 此处以qwen-plus为例，可按需更换模型名称。模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
                 .model("qwen-plus")
-                .messages(Arrays.asList(userMsg))
+                .messages(Collections.singletonList(userMsg))
                 .resultFormat(GenerationParam.ResultFormat.MESSAGE)
                 .incrementalOutput(true)
                 .build();

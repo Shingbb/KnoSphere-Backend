@@ -9,6 +9,7 @@ import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.InputRequiredException;
 import com.alibaba.dashscope.exception.NoApiKeyException;
 import com.alibaba.dashscope.utils.JsonUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 
@@ -18,6 +19,7 @@ import java.util.Arrays;
  * @author Shing
  * date 6/6/2025
  */
+@Slf4j
 public class SdkAiInvoke {
     public static GenerationResult callWithMessage() throws ApiException, NoApiKeyException, InputRequiredException {
         Generation gen = new Generation();
@@ -42,10 +44,10 @@ public class SdkAiInvoke {
     public static void main(String[] args) {
         try {
             GenerationResult result = callWithMessage();
-            System.out.println(JsonUtils.toJson(result));
+            log.info(JsonUtils.toJson(result));
         } catch (ApiException | NoApiKeyException | InputRequiredException e) {
             // 使用日志框架记录异常信息
-            System.err.println("An error occurred while calling the generation service: " + e.getMessage());
+            log.error("An error occurred while calling the generation service: {}", e.getMessage());
         }
         System.exit(0);
     }
