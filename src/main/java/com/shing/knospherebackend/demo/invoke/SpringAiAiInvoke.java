@@ -2,12 +2,11 @@ package com.shing.knospherebackend.demo.invoke;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.prompt.Prompt;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,17 +16,20 @@ import org.springframework.stereotype.Component;
  * date 6/6/2025
  */
 @Slf4j
+// 取消注释即可在 SpringBoot 项目启动时执行
 @Component
-public class SpringAiAiInvoke  implements ApplicationListener<ContextRefreshedEvent> {
+public class SpringAiAiInvoke  implements CommandLineRunner {
 
     @Resource
+    @Qualifier("dashscopeChatModel")
     private ChatModel dashscopeChatModel;
 
     @Override
-    public void onApplicationEvent(@NotNull ContextRefreshedEvent event) {
-        AssistantMessage assistantMessage = dashscopeChatModel.call(new Prompt("你好"))
+    public void run(String... args) throws Exception {
+        AssistantMessage assistantMessage = dashscopeChatModel.call(new Prompt("你好，你是谁,能干些什么"))
                 .getResult()
                 .getOutput();
         log.info(assistantMessage.getText());
+
     }
 }
