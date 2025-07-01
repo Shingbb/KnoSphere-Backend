@@ -4,24 +4,11 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class Knife4jConfig {
-
-    /**
-     * 配置默认分组API文档
-     * 匹配com.shing.knospherebackend.controller包下的所有接口
-     */
-    @Bean
-    public GroupedOpenApi defaultApiGroup() {
-        return GroupedOpenApi.builder()
-                .group("default")  // 与yml中的group名称一致
-                .packagesToScan("com.shing.knospherebackend.controller") // 扫描的控制器包路径
-                .build();
-    }
 
     /**
      * 自定义OpenAPI配置
